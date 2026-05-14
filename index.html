@@ -1,119 +1,567 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lun Li - Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lun Li - CPD Portfolio</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-    header { background: #2c3e50; color: #fff; padding: 20px; text-align: center; }
-    nav { background: #34495e; padding: 10px; text-align: center; }
-    nav a { color: #fff; margin: 0 15px; text-decoration: none; }
-    section { padding: 20px; max-width: 900px; margin: auto; }
-    h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 5px; }
-    ul { list-style-type: none; padding: 0; }
-    li { margin-bottom: 8px; }
-    footer { background: #2c3e50; color: #fff; text-align: center; padding: 10px; margin-top: 30px; }
-    .project { margin-bottom: 20px; }
+    :root {
+      --primary: #203040;
+      --secondary: #2f455c;
+      --accent: #0f766e;
+      --light: #f7f9fb;
+      --card: #ffffff;
+      --text: #263238;
+      --muted: #607080;
+      --border: #e5eaf0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background: var(--light);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      padding: 42px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.4rem;
+      letter-spacing: 0.5px;
+    }
+
+    header p {
+      max-width: 850px;
+      margin: 10px auto 0;
+      color: #e8eef5;
+      font-size: 1.05rem;
+    }
+
+    nav {
+      background: #172331;
+      padding: 12px 10px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 12px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      color: #9ee8dc;
+    }
+
+    section {
+      padding: 34px 20px;
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    h2 {
+      color: var(--primary);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 8px;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--secondary);
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    .profile-img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid #ffffff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 22px rgba(28, 45, 61, 0.06);
+    }
+
+    .tag-row {
+      margin: 10px 0 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e8f5f3;
+      color: #0f5f59;
+      border: 1px solid #cce9e4;
+      border-radius: 999px;
+      padding: 5px 10px;
+      margin: 4px 4px 4px 0;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .project-image {
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #f0f3f5;
+      margin-top: 12px;
+    }
+
+    .caption {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .project-links a {
+      display: inline-block;
+      margin-right: 14px;
+      margin-top: 6px;
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .evidence-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .evidence-table th,
+    .evidence-table td {
+      border-bottom: 1px solid var(--border);
+      padding: 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .evidence-table th {
+      background: #eef3f7;
+      color: var(--primary);
+    }
+
+    footer {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 18px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 800px) {
+      .intro, .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      nav a {
+        display: inline-block;
+        margin: 5px 8px;
+      }
+
+      header h1 {
+        font-size: 2rem;
+      }
+    }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Lun Li</h1>
-  <p>B.Eng. Artificial Intelligence | Robotics & AI</p>
+  <p>MSc Robotics Student | ROS 2, Robotic Perception, Autonomous Systems and Robotic Software Integration</p>
 </header>
 
 <nav>
   <a href="#about">About</a>
+  <a href="#interests">Interests</a>
   <a href="#skills">Skills</a>
   <a href="#projects">Projects</a>
+  <a href="#cpd">CPD Reflection</a>
   <a href="#experience">Experience</a>
   <a href="#contact">Contact</a>
 </nav>
 
 <section id="about">
   <h2>About Me</h2>
-  <img src="images/me.jpg" alt="Li Lun" width="200" style="border-radius: 50%; margin: 10px 0;">
-  <p>I am currently pursuing an MSc in Robotics at the University of Manchester, building on my undergraduate background in Artificial Intelligence (B.Eng., Tiangong University, 2021–2025). 
-     My academic interests lie in intelligent control, machine learning, and robotic system design.</p>
-  <p>Looking ahead, I aim to develop advanced robotic systems that integrate perception, control, and AI for real-world applications. 
-     I am particularly interested in autonomous systems, human–robot interaction, and intelligent manufacturing, and I aspire to contribute to innovative solutions that improve efficiency, safety, and quality of life.</p>
+  <div class="intro">
+    <img src="images/me.jpg" alt="Portrait of Lun Li" class="profile-img" />
+    <div>
+      <p>
+        I am an MSc Robotics student at The University of Manchester, building on my undergraduate background in Artificial Intelligence at Tiangong University. My current work focuses on robotic software development, ROS 2-based system integration, robotic perception, autonomous navigation, and feedback control.
+      </p>
+      <p>
+        Through my MSc study, I have worked on projects involving mobile robots, RGB-D perception, LiDAR-based navigation, manipulator integration, drone control, Gazebo simulation, and path planning. These projects helped me understand robotics as a complete engineering pipeline, where perception, planning, control, hardware, and software communication must work reliably together.
+      </p>
+      <p>
+        My professional goal is to become a robotics software engineer who can design, implement, test, and integrate real-world robotic systems.
+      </p>
+    </div>
+  </div>
 </section>
 
-
+<section id="interests">
+  <h2>Objectives and Research Interests</h2>
+  <div class="card">
+    <p>
+      My main objective is to develop strong practical engineering ability in robotic software and system integration. I am especially interested in building autonomous robotic systems that combine perception, navigation, control, and manipulation.
+    </p>
+    <div class="tag-row">
+      <span class="tag">ROS 2</span>
+      <span class="tag">Robotic Perception</span>
+      <span class="tag">RGB-D Sensing</span>
+      <span class="tag">Mobile Robots</span>
+      <span class="tag">Manipulation</span>
+      <span class="tag">Navigation and SLAM</span>
+      <span class="tag">Feedback Control</span>
+      <span class="tag">Reinforcement Learning</span>
+      <span class="tag">Human-Robot Interaction</span>
+    </div>
+    <p>
+      I am also interested in learning-based control and assistive robotics, particularly how intelligent methods can improve robot autonomy, safety, and adaptability in uncertain environments.
+    </p>
+  </div>
+</section>
 
 <section id="skills">
   <h2>Skills</h2>
-  <ul>
-    <li>Programming: Python, C, C++, Matlab</li>
-    <li>Robotics: ROS2, Raspberry Pi</li>
-    <li>Databases: MySQL</li>
-    <li>Machine Learning: Neural networks, regression, decision trees, KNN, K-means</li>
-    <li>Deep Learning Framework: PyTorch</li>
-    <li>Tools: Selenium, Appium, JIRA, Matlab toolboxes</li>
-    <li>Languages: English Chinese</li>
-  </ul>
+  <div class="grid-2">
+    <div class="card">
+      <h3>Programming and Software</h3>
+      <ul>
+        <li>Python, C/C++, MATLAB</li>
+        <li>Linux development environment</li>
+        <li>Git version control</li>
+        <li>Testing, debugging, and technical documentation</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Robotics Software</h3>
+      <ul>
+        <li>ROS 2 node development and modular software design</li>
+        <li>ROS 2 topics, actions, launch files, and TF/TF2</li>
+        <li>Robot software integration and communication debugging</li>
+        <li>Gazebo, RViz, RQT, and ros_gz_bridge</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Perception and Navigation</h3>
+      <ul>
+        <li>RGB-D sensing and depth-based 3D localisation</li>
+        <li>Object detection and image processing</li>
+        <li>Coordinate transformation and frame reasoning</li>
+        <li>LiDAR data processing, path planning, and navigation pipeline</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Systems and Hardware</h3>
+      <ul>
+        <li>Intel NUC, Raspberry Pi, Intel RealSense, RPLiDAR</li>
+        <li>Leo Rover and MyCobot integration experience</li>
+        <li>Feedback control, modelling, finite state machines</li>
+        <li>Automation testing experience with Selenium, Appium, and JIRA</li>
+      </ul>
+    </div>
+  </div>
 </section>
 
-
 <section id="projects">
-  <h2>Projects</h2>
+  <h2>Selected Projects</h2>
+  <p class="note">
+    This section has been updated to include project goals, my contribution, technical approach, outcomes, and supporting project links where available.
+  </p>
 
-  <div class="project">
-    <strong>Filament Detection using OpenCV</strong>
-    <p>Implemented contour detection and filament recognition with Python and OpenCV, including bounding box fitting and aspect ratio analysis.</p>
-    <img src="images/filament.png" alt="Filament Detection" width="400">
+  <div class="card" id="mobile-manipulator">
+    <h3>Autonomous Mobile Manipulator Robot System</h3>
+    <p><strong>University of Manchester Team Project | 2025–2026</strong></p>
+    <div class="tag-row">
+      <span class="tag">ROS 2</span>
+      <span class="tag">Leo Rover</span>
+      <span class="tag">RealSense</span>
+      <span class="tag">RPLiDAR</span>
+      <span class="tag">MyCobot</span>
+      <span class="tag">System Integration</span>
+    </div>
+    <p><strong>Goal:</strong> The goal of this project was to design and integrate an autonomous mobile manipulation system capable of perceiving target objects, navigating within an environment, and providing object position information for downstream robotic manipulation.</p>
+    <p><strong>My Contribution:</strong> My main contribution focused on ROS 2 software integration, perception, and modular system communication. I helped organise the communication structure between perception, navigation, and manipulation modules, and worked on RGB-D-based object detection and 3D localisation.</p>
+    <p><strong>Technical Approach:</strong> The system combined a Leo Rover mobile platform, Intel NUC, RPLiDAR, Intel RealSense RGB-D camera, and a MyCobot robotic arm. ROS 2 topics and TF were used to connect sensor data, perception outputs, navigation information, and manipulation-related target information.</p>
+    <p><strong>Outcome:</strong> This project improved my understanding of complete robotic systems, especially how perception, navigation, manipulation, hardware, and ROS 2 software architecture must be integrated and debugged together.</p>
+    <div class="project-links">
+      <a href="https://github.com/ll19828366916" target="_blank">GitHub / Code</a>
+    </div>
+    <img src="images/mobile_manipulator_system.jpg" alt="Autonomous mobile manipulator robot system" class="project-image" />
+    <p class="caption">Autonomous mobile manipulation platform integrating mobile base, sensors, computing hardware and manipulator.</p>
   </div>
 
-  <div class="project">
-    <strong>3D Rotation of Application Logos</strong>
-    <p>Used Python to draw and rotate application logos (Chrome, TikTok, NetEase Music, Steam, etc.), demonstrating 2D transformation and visualization.</p>
-    <img src="images/logos.png" alt="3D Rotation of Logos" width="400">
+  <div class="card" id="rgbd-perception">
+    <h3>RGB-D Object Detection and 3D Localisation for Robotic Manipulation</h3>
+    <p><strong>ROS 2 / Intel RealSense / Object Detection | 2025–2026</strong></p>
+    <div class="tag-row">
+      <span class="tag">RGB-D</span>
+      <span class="tag">Object Detection</span>
+      <span class="tag">3D Localisation</span>
+      <span class="tag">TF2</span>
+      <span class="tag">Robotic Perception</span>
+    </div>
+    <p><strong>Goal:</strong> The goal was to develop a perception module that could detect target objects and estimate their 3D positions for robotic manipulation tasks.</p>
+    <p><strong>My Contribution:</strong> I worked on the RGB-D perception pipeline, including object detection, depth processing, 3D position estimation, and ROS 2 message publication. I also helped connect the perception output with the wider robot system.</p>
+    <p><strong>Technical Approach:</strong> The system used colour and depth images from an Intel RealSense camera. After detecting target objects in the image, depth information around the object centre was sampled and filtered. The 2D image point was then projected into a 3D point using camera intrinsics and transformed into the required robot frame using TF.</p>
+    <p><strong>Outcome:</strong> This project strengthened my understanding of sensor noise, coordinate frames, depth-based localisation, and the importance of reliable perception outputs in robot manipulation.</p>
+    <div class="project-links">
+      <a href="https://github.com/ll19828366916" target="_blank">GitHub / Code</a>
+    </div>
+    <img src="images/rgbd_detection.jpg" alt="RGB-D object detection and 3D localisation result" class="project-image" />
+    <p class="caption">Object detection and depth-based localisation result for robotic manipulation.</p>
   </div>
 
-  <div class="project">
-    <strong>Hand Gesture Recognition with MediaPipe</strong>
-    <p>Developed a real-time hand gesture recognition system (Rock, Paper, Scissors) using MediaPipe, detecting face and hand keypoints for human-computer interaction.</p>
-    <img src="images/hand_gestures.png" alt="Hand Gesture Recognition" width="400">
+  <div class="card" id="drone-control">
+    <h3>ROS 2 Drone Control and Gazebo Simulation System</h3>
+    <p><strong>ROS 2 / Gazebo / TF2 / ros_gz_bridge | 2025</strong></p>
+    <div class="tag-row">
+      <span class="tag">ROS 2</span>
+      <span class="tag">Gazebo</span>
+      <span class="tag">TF2</span>
+      <span class="tag">Action Server</span>
+      <span class="tag">Velocity Control</span>
+    </div>
+    <p><strong>Goal:</strong> The goal was to build a simulated drone control system that could receive target poses, estimate its current pose, and move towards a desired position using velocity commands.</p>
+    <p><strong>My Contribution:</strong> I implemented the ROS 2 control pipeline, including pose acquisition through TF2, velocity command publication, and action-based target pose control. I also worked on bridging Gazebo simulation topics with ROS 2.</p>
+    <p><strong>Technical Approach:</strong> Gazebo was used for simulation and ROS 2 was used for control. The drone pose was obtained through TF2, while velocity commands were published to a bridged command velocity topic. An action server received target poses and provided feedback based on the latest pose estimate.</p>
+    <p><strong>Outcome:</strong> This project improved my practical understanding of ROS 2-Gazebo integration, action servers, TF-based pose tracking, velocity control, and simulation-based robot software testing.</p>
+    <div class="project-links">
+      <a href="https://github.com/ll19828366916" target="_blank">GitHub / Code</a>
+    </div>
+    <img src="images/drone_gazebo.jpg" alt="Drone control simulation in Gazebo" class="project-image" />
+    <p class="caption">Drone control simulation in Gazebo using ROS 2, TF2 and velocity command control.</p>
   </div>
 
-  <div class="project">
-    <strong>Object Dimension Measurement</strong>
-    <p>Applied OpenCV for contour detection and bounding box measurement of mechanical components, calculating width and height in pixels for automated inspection.</p>
-    <img src="images/dimensions.png" alt="Object Dimension Measurement" width="400">
+  <div class="card" id="uav-hovering">
+    <h3>UAV Feedback Control and Stable Hovering</h3>
+    <p><strong>Feedback Control / Simulation / Controller Tuning | 2026</strong></p>
+    <div class="tag-row">
+      <span class="tag">Feedback Control</span>
+      <span class="tag">Controller Tuning</span>
+      <span class="tag">Stability Analysis</span>
+      <span class="tag">Wind Disturbance</span>
+    </div>
+    <p><strong>Goal:</strong> The goal was to design and tune feedback controllers for a UAV in a 3D simulation environment, enabling the vehicle to reach a target position and maintain stable hovering under disturbance.</p>
+    <p><strong>My Contribution:</strong> I worked on controller tuning and performance analysis. I tested different control gains, observed system responses, and adjusted parameters to balance fast target acquisition with stable behaviour.</p>
+    <p><strong>Technical Approach:</strong> The controller was tuned using an inner-to-outer loop approach. The inner attitude-related loop was stabilised first, followed by the outer position loop. Different gains were compared based on response speed, overshoot, oscillation, and stability.</p>
+    <p><strong>Outcome:</strong> This project helped me understand how feedback gain tuning affects stability, oscillation, response speed, robustness, and engineering trade-offs.</p>
+    <img src="images/uav_response_curve.jpg" alt="UAV feedback control response curve" class="project-image" />
+    <p class="caption">Controller tuning and response analysis for stable UAV hovering.</p>
   </div>
 
-  <div class="project">
-    <strong>3D Scene Reconstruction with Open3D</strong>
-    <p>Processed RGB-D images with Open3D to build real-time 3D point cloud models, visualizing both depth maps and reconstructed scenes for robotics perception.</p>
-    <img src="images/reconstruction.png" alt="3D Scene Reconstruction" width="400">
+  <div class="card" id="astar">
+    <h3>Mobile Robot Path Planning Using A*</h3>
+    <p><strong>Python / Path Planning / Grid Map | 2026</strong></p>
+    <div class="tag-row">
+      <span class="tag">A*</span>
+      <span class="tag">Path Planning</span>
+      <span class="tag">Python</span>
+      <span class="tag">Grid Map</span>
+      <span class="tag">Heuristic Search</span>
+    </div>
+    <p><strong>Goal:</strong> The goal was to implement the A* path planning algorithm for a mobile robot in a grid-based environment, allowing the robot to find an efficient collision-free path from a start point to a goal point.</p>
+    <p><strong>My Contribution:</strong> I implemented the A* algorithm in Python, including grid map representation, obstacle handling, cost calculation, heuristic design, and path visualisation.</p>
+    <p><strong>Technical Approach:</strong> The planner used a four-connected motion model and a Euclidean distance heuristic. The algorithm evaluated neighbouring cells based on accumulated path cost and estimated distance to the goal, then reconstructed the final path after the goal was reached.</p>
+    <p><strong>Outcome:</strong> This project strengthened my understanding of search algorithms, heuristic functions, and classical planning methods used in autonomous mobile robots.</p>
+    <div class="project-links">
+      <a href="https://github.com/ll19828366916" target="_blank">GitHub / Code</a>
+    </div>
+    <img src="images/astar_path.jpg" alt="A star path planning result" class="project-image" />
+    <p class="caption">A* path planning result showing obstacle avoidance and final route generation.</p>
   </div>
 
+  <div class="card" id="manipulator-identification">
+    <h3>Flexible Manipulator Dynamic Model Parameter Identification</h3>
+    <p><strong>MATLAB / Modelling / Least Squares / Particle Swarm Optimisation | 2023</strong></p>
+    <div class="tag-row">
+      <span class="tag">MATLAB</span>
+      <span class="tag">Robot Dynamics</span>
+      <span class="tag">Parameter Identification</span>
+      <span class="tag">Least Squares</span>
+      <span class="tag">PSO</span>
+    </div>
+    <p><strong>Goal:</strong> The goal was to identify key parameters of a flexible manipulator dynamic model and evaluate the accuracy of the identified model through simulation.</p>
+    <p><strong>My Contribution:</strong> I used MATLAB for dynamic modelling, simulation, parameter identification, and result analysis. I applied least squares and particle swarm optimisation methods to estimate important model parameters.</p>
+    <p><strong>Technical Approach:</strong> The project involved building a mathematical model, preparing simulation data, estimating model parameters, and evaluating the difference between model predictions and reference data.</p>
+    <p><strong>Outcome:</strong> This project developed my understanding of robot dynamics, modelling, optimisation, and simulation-based engineering analysis.</p>
+    <div class="project-links">
+      <a href="https://github.com/ll19828366916" target="_blank">GitHub / Code</a>
+    </div>
+    <img src="images/flexible_manipulator_model.jpg" alt="Flexible manipulator parameter identification result" class="project-image" />
+    <p class="caption">Dynamic modelling and parameter identification result for a flexible manipulator.</p>
+  </div>
+
+  <div class="card" id="earlier-cv-projects">
+    <h3>Earlier Computer Vision and AI Projects</h3>
+    <p><strong>OpenCV / MediaPipe / Open3D / Python</strong></p>
+    <p>
+      Before my MSc Robotics study, I completed several smaller computer vision and AI projects, including OpenCV-based filament detection, object dimension measurement, hand gesture recognition using MediaPipe, and RGB-D point cloud reconstruction using Open3D. These projects helped me build a foundation in image processing, feature detection, real-time visualisation, and 3D perception, which later supported my robotics perception work.
+    </p>
+    <img src="images/filament.png" alt="Earlier computer vision project example" class="project-image" />
+    <p class="caption">Example of earlier OpenCV-based computer vision work.</p>
+  </div>
+</section>
+
+<section id="cpd">
+  <h2>CPD Reflection and Development Plan</h2>
+  <div class="card">
+    <p>
+      This CPD portfolio reflects my development during the MSc Robotics programme. At the beginning of the year, my background was mainly in artificial intelligence, programming, and computer vision. Through the two semesters, I developed more practical robotics engineering experience, especially in ROS 2 software integration, robotic perception, simulation-based control, path planning, and system-level debugging.
+    </p>
+    <p>
+      The projects above provide evidence for my UK-SPEC reflection. They show how I applied technical knowledge, solved engineering problems, communicated within team projects, and reflected on areas that require further development. My current strengths are practical implementation, perception and ROS 2 integration. My main areas for further development are advanced ROS 2 software architecture, robust real-world perception, and professional engineering communication.
+    </p>
+  </div>
+
+  <table class="evidence-table">
+    <thead>
+      <tr>
+        <th>UK-SPEC Area</th>
+        <th>Evidence from My Work</th>
+        <th>Reflection</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>A: Knowledge and Understanding</td>
+        <td>Robotics MSc modules, ROS 2 drone control, UAV feedback control, A* path planning, and flexible manipulator modelling.</td>
+        <td>I have applied engineering and computing knowledge to robotics problems involving perception, control, simulation, modelling, and planning.</td>
+      </tr>
+      <tr>
+        <td>B: Design, Development and Problem Solving</td>
+        <td>Autonomous mobile manipulator system, RGB-D object localisation, ROS 2-Gazebo drone control pipeline, and A* implementation.</td>
+        <td>I have developed practical solutions and learned to evaluate them through implementation, debugging, visualisation, and simulation testing.</td>
+      </tr>
+      <tr>
+        <td>C: Responsibility, Management and Safe Practice</td>
+        <td>Team-based robot integration project involving a mobile base, sensors, computing hardware, and robotic manipulation.</td>
+        <td>I became more aware that robotic systems require safe integration, careful testing, reliable communication between modules, and consideration of hardware limitations.</td>
+      </tr>
+      <tr>
+        <td>D: Communication and Interpersonal Skills</td>
+        <td>Team project communication, project documentation, technical explanations, portfolio writing, and presentation of project outcomes.</td>
+        <td>I improved my ability to explain project goals, technical methods, personal contribution, outcomes, and limitations in a clearer engineering style.</td>
+      </tr>
+      <tr>
+        <td>E: Professional Commitment</td>
+        <td>CPD reflection, future development planning, continuous learning in robotics, and awareness of professional engineering practice.</td>
+        <td>I recognise that becoming a robotics engineer requires continuous development in technical depth, safe practice, teamwork, and professional communication.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grid-3" style="margin-top: 22px;">
+    <div class="card">
+      <h3>Future CPD Focus 1: B3</h3>
+      <p><strong>Engineering Implementation and Evaluation</strong></p>
+      <p>I plan to improve my ability to implement, test, and evaluate complete robotics software systems, especially ROS 2-based systems involving perception, navigation, and manipulation.</p>
+    </div>
+    <div class="card">
+      <h3>Future CPD Focus 2: C2</h3>
+      <p><strong>Safe and Reliable Robotic Systems</strong></p>
+      <p>I plan to develop stronger awareness of safe system integration, risk assessment, and reliable testing when working with real robotic hardware and autonomous systems.</p>
+    </div>
+    <div class="card">
+      <h3>Future CPD Focus 3: D1</h3>
+      <p><strong>Engineering Communication</strong></p>
+      <p>I plan to improve my ability to produce clear documentation, explain technical decisions, and communicate effectively within robotics engineering teams.</p>
+    </div>
+  </div>
 </section>
 
 <section id="experience">
   <h2>Experience</h2>
-  <p><strong>Software Testing Intern – Tianjin Changsuo (2024):</strong> Automated testing with Selenium/Appium; generated reports with Python and visualization tools.</p>
-  <p><strong>Data Management Engineer Assistant – Chengdu Running Rhino (2023):</strong> Assisted in database design, optimization, and security management.</p>
+  <div class="card">
+    <h3>Software Testing Intern - ThunderSoft, Tianjin</h3>
+    <p><strong>July 2024 - October 2024</strong></p>
+    <p>
+      I used Python to generate test reports and visualise testing results and trends. I also wrote automated testing scripts using Selenium and Appium, supported test framework maintenance, and used JIRA for defect tracking and management.
+    </p>
+  </div>
+  <div class="card">
+    <h3>Data Management Engineer Assistant - Chengdu Running Rhino Technology</h3>
+    <p><strong>June 2023 - August 2023</strong></p>
+    <p>
+      I assisted with database system design, management and optimisation, and gained exposure to data modelling, data warehousing, backup and recovery, and data security management.
+    </p>
+  </div>
 </section>
 
 <section id="contact">
   <h2>Contact</h2>
-  <p>Email: <a href="mailto:19828366916@163.com">19828366916@163.com</a></p>
-  <p>
-  <a href="https://github.com/ll19828366916" target="_blank">GitHub</a> | 
- 
-  <a href="files/CV_LiLun.pdf" target="_blank">Download CV</a>
-</p>
-
+  <div class="card">
+    <p>Email: <a href="mailto:19828366916@163.com">19828366916@163.com</a></p>
+    <p>
+      <a href="https://github.com/ll19828366916" target="_blank">GitHub</a> |
+      <a href="files/CV_LiLun.pdf" target="_blank">Download CV</a>
+    </p>
+  </div>
 </section>
 
 <footer>
-  <p>© 2025 Li Lun</p>
+  <p>© 2026 Lun Li | CPD Portfolio</p>
 </footer>
 
 </body>
 </html>
-
-
